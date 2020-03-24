@@ -12,7 +12,7 @@ import org.jsoup.select.Elements;
 
  
 public class MainClass {
-	public static DB db = new DB();
+	public static WebcrawlerDB db = new WebcrawlerDB();
  
 	public static void main(String[] args) throws SQLException, IOException {
 		db.runSql2("TRUNCATE Record;");
@@ -27,7 +27,7 @@ public class MainClass {
  
 		}else{
 			//store the URL to database to avoid parsing again
-			sql = "INSERT INTO  `Crawler`.`Record` " + "(`URL`) VALUES " + "(?);";
+			sql = "INSERT INTO  `webcrawler`.`Record` " + "(`URL`) VALUES " + "(?);";
 			PreparedStatement stmt = db.conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, URL);
 			stmt.execute();
