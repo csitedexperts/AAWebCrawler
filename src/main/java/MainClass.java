@@ -7,14 +7,16 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+// Source: https://www.programcreek.com/2012/12/how-to-make-a-web-crawler-using-java/
+
  
- 
-public class Main {
+public class MainClass {
 	public static DB db = new DB();
  
 	public static void main(String[] args) throws SQLException, IOException {
 		db.runSql2("TRUNCATE Record;");
-		processPage("http://www.mit.edu");
+		processPage("https://www.cdc.gov/coronavirus/");
 	}
  
 	public static void processPage(String URL) throws SQLException, IOException{
@@ -31,16 +33,16 @@ public class Main {
 			stmt.execute();
  
 			//get useful information
-			Document doc = Jsoup.connect("http://www.mit.edu/").get();
+			Document doc = Jsoup.connect("https://www.cdc.gov/").get();
  
-			if(doc.text().contains("research")){
+			if(doc.text().contains("coronavirus spread out")){
 				System.out.println(URL);
 			}
  
 			//get all links and recursively call the processPage method
 			Elements questions = doc.select("a[href]");
 			for(Element link: questions){
-				if(link.attr("href").contains("mit.edu"))
+				if(link.attr("href").contains("cdc.gov"))
 					processPage(link.attr("abs:href"));
 			}
 		}
