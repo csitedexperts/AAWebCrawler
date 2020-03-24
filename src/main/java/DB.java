@@ -11,8 +11,8 @@ public class DB {
 	public DB() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/Crawler";
-			conn = DriverManager.getConnection(url, "root", "admin213");
+			String url = "jdbc:mysql://localhost:3306/webcrawler";
+			conn = DriverManager.getConnection(url, "root", "password");
 			System.out.println("conn built");
 		} catch (SQLException e) {
 			e.printStackTrace();
